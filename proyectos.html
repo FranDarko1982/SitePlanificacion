@@ -50,7 +50,7 @@
       <p>Aplicativo en Creatio para gestionar reclamaciones de abono por teletrabajo: tramitación por estados, notificaciones automáticas e informes en Excel.</p>
       <div class="meta">Flujo completo en Creatio · Descarga/Upload .xlsx · Seguimiento y resultados</div>
       <div style="margin-top:12px; display:flex; gap:8px; flex-wrap:wrap">
-        <a class="btn" href="#" onclick="alert('Placeholder: Creatio Reclamaciones'); return false;">
+        <a class="btn" id="btnReclamaciones" href="#">
           <span class="material-symbols-rounded">open_in_new</span> Abrir
         </a>
         <a class="btn" href="#" onclick="alert('Placeholder: Documentación'); return false;">
@@ -153,3 +153,33 @@
     </div>
   </div>
 </div>
+<!-- Modal Reclamaciones: imagen desde Drive -->
+<div id="modalReclamaciones" style="display:none; position:fixed; inset:0; background:rgba(0,0,0,.6); z-index:1000; align-items:center; justify-content:center;">
+  <div style="background:#fff; padding:20px; border-radius:12px; max-width:95%; max-height:90%; overflow:auto; position:relative; box-shadow:0 10px 30px rgba(0,0,0,.25);">
+    <button id="closeModalReclamaciones" aria-label="Cerrar" style="position:absolute; top:10px; right:12px; border:none; background:transparent; font-size:26px; cursor:pointer; line-height:1">×</button>
+    <img src="https://drive.google.com/uc?export=view&id=1r0iUNu5yyCsd9EIKimK3tId8Bzz1SwBn" alt="Flujo Reclamaciones de nómina – Pago TT" style="max-width:100%; height:auto; border-radius:8px; display:block;">
+  </div>
+</div>
+<script>
+  (function(){
+    const btn = document.getElementById('btnReclamaciones');
+    const modal = document.getElementById('modalReclamaciones');
+    const closeBtn = document.getElementById('closeModalReclamaciones');
+
+    if (btn && modal && closeBtn) {
+      btn.addEventListener('click', function(e){
+        e.preventDefault();
+        modal.style.display = 'flex';
+        document.body.style.overflow = 'hidden';
+      });
+
+      function closeModal(){
+        modal.style.display = 'none';
+        document.body.style.overflow = '';
+      }
+      closeBtn.addEventListener('click', closeModal);
+      modal.addEventListener('click', function(e){ if (e.target === modal) closeModal(); });
+      document.addEventListener('keydown', function(e){ if (e.key === 'Escape') closeModal(); });
+    }
+  })();
+</script>
